@@ -21,8 +21,7 @@ if (menuButton && navLinks) {
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
 
-// To enable email delivery, create a form at https://formspree.io/
-// and replace the placeholder below with your Formspree form ID.
+// Add your verified Formspree endpoint here to receive enquiries by email.
 const FORMSPREE_ENDPOINT = '';
 
 const form = document.getElementById('contact-form');
@@ -34,8 +33,7 @@ if (form) {
     if (!form.reportValidity()) return;
 
     if (!FORMSPREE_ENDPOINT) {
-      formNote.textContent = 'Your message is ready, but email delivery is not configured yet. Add your Formspree endpoint in script.js to activate this form.';
-      formNote.setAttribute('role', 'status');
+      formNote.textContent = 'Thank you. The enquiry form is ready, but online delivery has not been connected yet. Please contact BOUY Traders directly until the company email endpoint is configured.';
       return;
     }
 
@@ -51,11 +49,11 @@ if (form) {
         body: new FormData(form),
         headers: { Accept: 'application/json' }
       });
-      if (!response.ok) throw new Error('Unable to send message');
+      if (!response.ok) throw new Error('Unable to send enquiry');
       form.reset();
-      formNote.textContent = 'Thank you! Your enquiry has been sent.';
+      formNote.textContent = 'Thank you! Your business enquiry has been sent.';
     } catch (error) {
-      formNote.textContent = 'Sorry, your message could not be sent. Please try again or email us directly.';
+      formNote.textContent = 'Sorry, your enquiry could not be sent. Please try again later.';
     } finally {
       submitButton.disabled = false;
       submitButton.innerHTML = originalText;
